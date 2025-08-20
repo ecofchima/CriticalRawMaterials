@@ -9,32 +9,41 @@
             font-family: sans-serif;
             margin: 0;
             padding: 20px;
+            background-color: #f0f0f0; /* Light gray background for the entire page */
             display: flex;
-            flex-direction: column; /* Stacks children vertically */
-            min-height: 100vh; /* Ensures the body takes up at least the full viewport height */
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
         }
         .content-wrapper {
-            display: flex; /* Flex container for the main content and side panel */
-            flex: 1; /* Allows this container to grow and fill available space */
+            display: flex;
+            flex: 1;
         }
         .main-content {
             width: 70%;
-            padding-right: 20px;
+            padding: 20px;
+            background-color: white; /* White background for main content */
             box-sizing: border-box;
+            border-radius: 8px; /* Optional: adds rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
         }
         .side-panel {
             width: 30%;
-            background-color: #f0f0f0;
             padding: 20px;
+            background-color: white; /* White background for side panel */
             box-sizing: border-box;
+            border-radius: 8px; /* Optional: adds rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
+            margin-left: 20px;
             display: flex;
-            flex-direction: column; /* Stacks side panel content and footer vertically */
-            justify-content: space-between; /* Pushes the footer to the bottom */
-        }
-        .main-content h1, .main-content h2, .main-content .controls {
-            text-align: center;
+            flex-direction: column;
+            justify-content: space-between;
         }
         .controls {
+            text-align: center;
             margin-bottom: 20px;
         }
         .container {
@@ -55,29 +64,38 @@
         }
         .side-panel h2 {
             margin-top: 0;
+            text-align: center;
+        }
+        .link-container {
+            text-align: center;
         }
         .side-panel ul {
             list-style-type: none;
             padding: 0;
+            display: inline-block; /* Allows the container to shrink to the content's width */
+            text-align: left; /* Aligns the list items to the left */
         }
         .side-panel li {
             margin-bottom: 10px;
         }
-        footer {
-            padding-top: 20px;
-            border-top: 1px solid #ccc;
+        .footer {
+            padding: 20px;
+            text-align: center;
             font-size: 0.9em;
             color: #555;
-            text-align: center;
+            border-top: 1px solid #ccc;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 
+    <div class="header">
+        <h1>Strategic Raw Materials Network Comparator</h1>
+    </div>
+
     <div class="content-wrapper">
         <div class="main-content">
-            <h1>Strategic Raw Materials Network Comparator</h1>
-
             <div class="controls">
                 <label for="crm1Select">Material 1:</label>
                 <select id="crm1Select"></select>
@@ -187,8 +205,8 @@
         </div>
 
         <div class="side-panel">
-            <div>
-                <h2>Online Appendix</h2>
+            <h2>Online Appendix</h2>
+            <div class="link-container">
                 <ul>
                     <li><a href="crm_summary_and_uses_table.html">#1 CRM HS6 Codes</a></li>
                     <li><a href="liststable.html">#2 Institutional CRM List Comparison</a></li>
@@ -196,12 +214,13 @@
                     <li><a href="abbreviations.html">#4 Abbreviations</a></li>
                 </ul>
             </div>
-            <footer>
-                <p>Created by Fernanda Chima, August 2025. The trade networks illustrate the Top 20 exporters to the EU by import value for each material, along with their Top 3 suppliers (capturing the “z-country effect”). Communities are identified using the Louvain algorithm, which groups nodes based on dense interconnections. In the context of trade, these communities highlight blocs of economic alignment, regional agreements, or geopolitical alliances. Data source: BACI, HS6 digit level.</p>
-                <p>Last updated: August 19, 2025</p>
-            </footer>
         </div>
     </div>
     
+    <div class="footer">
+        <p>The trade networks illustrate the Top 20 exporters to the EU by import value for each material, along with their Top 3 suppliers (capturing the “z-country effect”). Communities are identified using the Louvain algorithm, which groups nodes based on dense interconnections. In the context of trade, these communities highlight blocs of economic alignment, regional agreements, or geopolitical alliances. Data source: BACI, HS6 digit level.</p>
+        <p>Created by Fernanda Chima. Last updated: August 20, 2025</p>
+    </div>
+
 </body>
 </html>
