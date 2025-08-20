@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abbreviations List</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #f3f4f6;
+        }
+        .container {
+            max-width: 960px;
+        }
+        .scrollable-table {
+            max-height: 500px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .scrollable-table::-webkit-scrollbar {
+            width: 8px;
+        }
+        .scrollable-table::-webkit-scrollbar-track {
+            background: #e5e7eb;
+            border-radius: 10px;
+        }
+        .scrollable-table::-webkit-scrollbar-thumb {
+            background: #9ca3af;
+            border-radius: 10px;
+        }
+        .scrollable-table::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
+
+    <div class="container bg-white p-6 md:p-10 rounded-3xl shadow-2xl w-full">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-6">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 md:mb-0">Abbreviations and Country Codes</h1>
+            <div class="relative w-full md:w-auto">
+                <input type="text" id="search-input" placeholder="Search for abbreviations or names..." class="w-full pl-10 pr-4 py-2 rounded-xl bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
+                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="scrollable-table rounded-xl border border-gray-200">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50 sticky top-0 z-10">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                            Abbreviation
+                        </th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                            Full Name
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="data-table" class="bg-white divide-y divide-gray-200">
+                    <!-- Table rows will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Data from your R data frame, converted to a JavaScript object
+        const abbreviations = {"ABW": "Aruba","AFG": "Afghanistan","AGO": "Angola","AIA": "Anguilla","ALB": "Albania","AND": "Andorra","ANT": "Netherlands Antilles","ARE": "United Arab Emirates","ARG": "Argentina","ARM": "Armenia","ASM": "American Samoa","ATF": "French Southern Territories","ATG": "Antigua and Barbuda","AUS": "Australia","AUT": "Austria","AZE": "Azerbaijan","BDI": "Burundi","BEL": "Belgium","BEN": "Benin","BES": "Bonaire, Sint Eustatius and Saba","BFA": "Burkina Faso","BGD": "Bangladesh","BGR": "Bulgaria","BHR": "Bahrain","BHS": "Bahamas","BIH": "Bosnia and Herzegovina","BLM": "Saint Barthélemy","BLR": "Belarus","BLZ": "Belize","BMU": "Bermuda","BOL": "Bolivia (Plurinational State of)","BRA": "Brazil","BRB": "Barbados","BRN": "Brunei Darussalam","BTN": "Bhutan","BWA": "Botswana","CAF": "Central African Republic","CAN": "Canada","CCK": "Cocos (Keeling) Islands","CHE": "Switzerland","CHL": "Chile","CHN": "China","CIV": "Côte d'Ivoire","CMR": "Cameroon","COD": "Congo (Democratic Republic of the)","COG": "Congo","COK": "Cook Islands","COL": "Colombia","COM": "Comoros","CPV": "Cabo Verde","CRI": "Costa Rica","CUB": "Cuba","CUW": "Curaçao","CXR": "Christmas Island","CYM": "Cayman Islands","CYP": "Cyprus","CZE": "Czechia","DEU": "Germany","DJI": "Djibouti","DMA": "Dominica","DNK": "Denmark","DOM": "Dominican Republic","DZA": "Algeria","ECU": "Ecuador","EGY": "Egypt","ERI": "Eritrea","ESP": "Spain","EST": "Estonia","ETH": "Ethiopia","FIN": "Finland","FJI": "Fiji","FLK": "Falkland Islands (Malvinas)","FRA": "France","FSM": "Micronesia (Federated States of)","GAB": "Gabon","GBR": "United Kingdom","GEO": "Georgia","GHA": "Ghana","GIB": "Gibraltar","GIN": "Guinea","GMB": "Gambia","GNB": "Guinea-Bissau","GNQ": "Equatorial Guinea","GRC": "Greece","GRD": "Grenada","GRL": "Greenland","GTM": "Guatemala","GUM": "GUM","GUY": "Guyana","HKG": "Hong Kong","HND": "Honduras","HRV": "Croatia","HTI": "Haiti","HUN": "Hungary","IDN": "Indonesia","IND": "India","IOT": "British Indian Ocean Territory","IRL": "Ireland","IRN": "Iran (Islamic Republic of)","IRQ": "Iraq","ISL": "Iceland","ISR": "Israel","ITA": "Italy","JAM": "Jamaica","JOR": "Jordan","JPN": "Japan","KAZ": "Kazakhstan","KEN": "Kenya","KGZ": "Kyrgyzstan","KHM": "Cambodia","KIR": "Kiribati","KNA": "Saint Kitts and Nevis","KOR": "Korea (Republic of)","KWT": "Kuwait","LAO": "Lao People's Democratic Republic","LBN": "Lebanon","LBR": "Liberia","LBY": "Libya","LCA": "Saint Lucia","LKA": "Sri Lanka","LSO": "Lesotho","LTU": "Lithuania","LUX": "Luxembourg","LVA": "Latvia","MAC": "Macao","MAR": "Morocco","MDA": "Moldova (Republic of)","MDG": "Madagascar","MDV": "Maldives","MEX": "Mexico","MHL": "Marshall Islands","MKD": "North Macedonia","MLI": "Mali","MLT": "Malta","MMR": "Myanmar","MNE": "Montenegro","MNG": "Mongolia","MNP": "Northern Mariana Islands","MOZ": "Mozambique","MRT": "Mauritania","MSR": "Montserrat","MUS": "Mauritius","MWI": "Malawi","MYS": "Malaysia","MYT": "Mayotte","NAM": "Namibia","NCL": "New Caledonia","NER": "Niger","NFK": "Norfolk Island","NGA": "Nigeria","NIC": "Nicaragua","NIU": "Niue","NLD": "Netherlands","NOR": "Norway","NPL": "Nepal","NRU": "Nauru","NZL": "New Zealand","OMN": "Oman","PAK": "Pakistan","PAN": "Panama","PCN": "Pitcairn","PER": "Peru","PHL": "Philippines","PLW": "Palau","PNG": "Papua New Guinea","POL": "Poland","PRK": "Korea (Democratic People's Republic of)","PRT": "Portugal","PRY": "Paraguay","PSE": "Palestine, State of","PYF": "French Polynesia","QAT": "Qatar","ROU": "Romania","RUS": "Russian Federation","RWA": "Rwanda","SAU": "Saudi Arabia","SDN": "Sudan","SEN": "Senegal","SGP": "Singapore","SHN": "Saint Helena, Ascension and Tristan da Cunha","SLB": "Solomon Islands","SLE": "Sierra Leone","SLV": "El Salvador","SMR": "San Marino","SOM": "Somalia","SPM": "Saint Pierre and Miquelon","SRB": "Serbia","SSD": "South Sudan","STP": "Sao Tome and Principe","SUR": "Suriname","SVK": "Slovakia","SVN": "Slovenia","SWE": "Sweden","SWZ": "Eswatini","SXM": "Sint Maarten (Dutch part)","SYC": "Seychelles","SYR": "Syrian Arab Republic","TCA": "Turks and Caicos Islands","TCD": "Chad","TGO": "Togo","THA": "Thailand","TJK": "Tajikistan","TKL": "Tokelau","TKM": "Turkmenistan","TLS": "Timor-Leste","TON": "Tonga","TTO": "Trinidad and Tobago","TUN": "Tunisia","TUR": "Turkey","TUV": "Tuvalu","TZA": "Tanzania (United Republic of)","UGA": "Uganda","UKR": "Ukraine","URY": "Uruguay","USA": "United States of America","UZB": "Uzbekistan","VCT": "Saint Vincent and the Grenadines","VEN": "Venezuela (Bolivarian Republic of)","VGB": "Virgin Islands (British)","VNM": "Viet Nam","VUT": "Vanuatu","WLF": "Wallis and Futuna","WSM": "Samoa","YEM": "Yemen","ZAF": "South Africa","ZMB": "Zambia","ZWE": "Zimbabwe","AU": "African Union","CRM": "Critical Raw Material","EU": "European Union","FE": "Fixed Effects","IRM": "Industrial Raw Material","NATO": "North Atlantic Treaty Organization","OECD": "Organisation for Economic Co-operation and Development","PMG": "Platinum Group Metals","PPML": "Pseudo-Poisson Maximum Likelihood","RDT": "Resource Dependency Theory","REE": "Rare Earth Elements","S19": "S19","SRM": "Strategic Raw Material","VAT": "Value-Added Tax","WTO": "World Trade Organization"};
+
+        const dataTableBody = document.getElementById("data-table");
+        const searchInput = document.getElementById("search-input");
+
+        // Function to render the table rows
+        function renderTable(data) {
+            dataTableBody.innerHTML = ""; // Clear existing rows
+            const sortedKeys = Object.keys(data); // The R code has already sorted the keys
+            sortedKeys.forEach(key => {
+                const value = data[key];
+                const row = document.createElement("tr");
+                row.className = "hover:bg-gray-50 transition-colors";
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${key}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${value}</td>
+                `;
+                dataTableBody.appendChild(row);
+            });
+        }
+
+        // Function to filter the table based on search input
+        function filterTable() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredData = {};
+            for (const key in abbreviations) {
+                if (key.toLowerCase().includes(searchTerm) || abbreviations[key].toLowerCase().includes(searchTerm)) {
+                    filteredData[key] = abbreviations[key];
+                }
+            }
+            renderTable(filteredData);
+        }
+
+        // Initial render of the table
+        renderTable(abbreviations);
+
+        // Add event listener for the search input
+        searchInput.addEventListener("input", filterTable);
+    </script>
+</body>
+</html>
+
